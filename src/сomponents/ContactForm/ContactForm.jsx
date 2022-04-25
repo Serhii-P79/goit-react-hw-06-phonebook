@@ -5,6 +5,8 @@ import { CssForm } from './ContactForm.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/store';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 export const ContactForm = ({ initName = '', initNumber = '' }) => {
   const [name, setName] = useState(initName);
   const [number, setNumber] = useState(initNumber);
@@ -61,7 +63,8 @@ export const ContactForm = ({ initName = '', initNumber = '' }) => {
       )
     ) {
       //  console.log('1');
-      alert(`${name} is already in contacts.`);
+      toast.error(`${name} is already in contacts.`);
+      // alert(`${name} is already in contacts.`);
       // return reject('Error! Error passed to reject function');
     } else {
       dispatch(addContact({ name, number }));
@@ -103,6 +106,7 @@ export const ContactForm = ({ initName = '', initNumber = '' }) => {
       <CssForm.Button type="submit" name="add">
         Add contact
       </CssForm.Button>
+      <Toaster position="top-center" reverseOrder={false} />
     </CssForm.Form>
   );
 };
